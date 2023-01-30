@@ -6,8 +6,8 @@
  */
 function request(
   url: string,
-  timeout: number,
-  params: object
+  params: object,
+  timeout: number = 3000
 ): Promise<Response> {
   const abortController: AbortController = new AbortController();
   const timer = setTimeout(() => {
@@ -25,8 +25,8 @@ function request(
 
       throw response;
     })
-    .catch((err) => {
-      throw err;
+    .catch((e) => {
+      throw e;
     })
     .finally(() => {
       clearTimeout(timer);
@@ -58,7 +58,6 @@ function fakeText(length: number): string {
 
 // TODO https://github.com/typicode/json-server#paginate
 
-const timeout: number = 3000;
 const req = {
   url: 'http://localhost:3000/files?_limit=123', // GET, POST
   // url: 'http://localhost:3000/files/2', // DELETE, PUT
@@ -88,8 +87,9 @@ const req = {
     // }),
   },
 };
+const timeout: number = 3000;
 
-request(req.url, timeout, req.params)
+request(req.url, req.params, timeout)
   .then((response: Response) => response.json())
   .then((response: object) => {
     console.log(response);
