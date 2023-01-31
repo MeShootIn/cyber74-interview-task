@@ -1,24 +1,18 @@
+import AppLayout from './AppLayout';
+import Edit from '../Edit/Edit'; // TODO
+import Home from '../Home/Home'; // NORM
+import NotFound from '../NotFound/NotFound'; // NORM
 import React from 'react';
-import './App.css';
+import { Route, Routes } from 'react-router-dom';
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          KEk <code>src/App/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path="/" element={<AppLayout />}>
+        <Route index element={<Home />} />
+        <Route path="edit" element={<Edit />} />
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </Routes>
   );
 }
-
-export default App;
