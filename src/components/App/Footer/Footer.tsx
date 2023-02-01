@@ -37,13 +37,11 @@ export default function Footer() {
         <h3>Свяжитесь со мной</h3>
 
         <address>
-          <ul>
-            {socialLinks.map((socialLink: SocialLinkProps) => (
-              <li key={socialLink.href}>
-                <SocialLink href={socialLink.href} title={socialLink.title} />
-              </li>
-            ))}
-          </ul>
+          {socialLinks.map((socialLink: SocialLinkProps) => (
+            <div key={socialLink.href}>
+              <SocialLink href={socialLink.href} title={socialLink.title} />
+            </div>
+          ))}
         </address>
       </div>
 

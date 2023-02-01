@@ -1,74 +1,54 @@
 {
-  "files": [
+  "file_names": [
     {
-      "name": "H",
+      "name": "react.txt",
+      "id": 1
+    },
+    {
+      "name": "cmd.bat",
+      "id": 2
+    },
+    {
+      "name": "heroku.sh",
+      "id": 3
+    },
+    {
+      "name": "javascript.js",
+      "id": 4
+    },
+    {
+      "name": "npm.sh",
+      "id": 5
+    },
+    {
+      "name": "yarn.sh",
+      "id": 6
+    }
+  ],
+  "file_contents": [
+    {
       "content": "siyMVGFFWN",
       "id": 1
     },
     {
-      "name": "s",
       "content": "IBjnHrQdWE",
       "id": 2
     },
     {
-      "name": "S",
       "content": "0ORicpXQee",
       "id": 3
     },
     {
-      "name": "O",
       "content": "3OsTHTBqmP",
       "id": 4
     },
     {
-      "name": "T",
       "content": "ry0z0ih7NO",
       "id": 5
     },
     {
-      "name": "g",
       "content": "0RJKXHJNzN",
       "id": 6
-    },
-    {
-      "name": "O",
-      "content": "j3uv45BSwF",
-      "id": 7
-    },
-    {
-      "name": "v",
-      "content": "bSYTmGZP63",
-      "id": 8
-    },
-    {
-      "name": "p",
-      "content": "2Mnd6EZZlF",
-      "id": 9
-    },
-    {
-      "name": "C",
-      "content": "Cr8UZXJFHV",
-      "id": 10
-    },
-    {
-      "name": "L",
-      "content": "jduIp9MR7I",
-      "id": 11
-    },
-    {
-      "name": "p",
-      "content": "8vFOoIg9tK",
-      "id": 12
-    },
-    {
-      "name": "I",
-      "content": "0dGxkJ8bal",
-      "id": 13
-    },
-    {
-      "name": "y",
-      "content": "pKLvW5sqiG",
-      "id": 14
     }
   ]
 }

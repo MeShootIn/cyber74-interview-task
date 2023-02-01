@@ -1,57 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import request from '../../utils/request';
-import FileInterface from '../../utils/file-interface';
+import { FileNameInterface } from '../../utils/file-interfaces';
 
-type Callback = () => void;
-
-// DEBUG
-const dummyCallback: Callback = () => {
+const DUMMY_CALLBACK = () => {
   alert('click');
 };
 
-interface ButtonProps {
-  onClick: Callback;
-  title: string;
-}
-
-function FileButton({ onClick, title }: ButtonProps) {
-  return <button onClick={onClick}>{title}</button>;
-}
-
-interface FilesListItemProps {
+interface FileNamesListItemProps {
   fileName: string;
 }
 
-function FilesListItem({ fileName }: FilesListItemProps) {
+function FileNamesListItem({ fileName }: FileNamesListItemProps) {
   return (
     <span>
       <strong>{fileName}</strong>
-      <FileButton onClick={dummyCallback} title="✏️" />
-      <FileButton onClick={dummyCallback} title="🗑️" />
+      <button onClick={DUMMY_CALLBACK}>✏️</button>
+      <button onClick={DUMMY_CALLBACK}>🗑️</button>
     </span>
   );
 }
 
 export default function Home() {
-  const [filesList, setFilesList] = useState<FileInterface[]>([
-    // {
-    //   name: 'first.txt',
-    //   content: 'asd',
-    //   id: 1,
-    // },
-    // {
-    //   name: 'second',
-    //   content: 'zxc',
-    //   id: 2,
-    // },
-  ]);
+  const [fileNames, setFileNames] = useState<FileNameInterface[]>([]);
 
-  function makeFilesListRequest() {
+  function makeFileNamesRequest() {
     // TODO https://github.com/typicode/json-server#paginate
-
+    // TODO https://github.com/typicode/json-server#add-custom-routes
+    // WARN Нельзя сделать выборку одного поля (name) => лучше свой сервер
     const requestOptions = {
-      url: 'http://localhost:4000/files?_limit=123', // GET, POST
-      // url: 'http://localhost:4000/files/2', // DELETE, PUT
+      url: 'http://localhost:3001/file_names?_limit=123', // GET, POST
+      // url: 'http://localhost:3001/file_names/2', // DELETE, PUT
       params: {
         method: 'GET',
         // method: 'POST',
@@ -71,42 +49,38 @@ export default function Home() {
         // POST, PUT
         //
         // body: JSON.stringify({
-        //   // id: random(5, 100), // POST
-        //   // id: 2, // PUT
         //   name: fakeText(1),
         //   content: fakeText(10),
         // }),
       },
     };
 
+    // FIXME Unchecked runtime.lastError: The message port closed before a response was received.
     request(requestOptions.url, requestOptions.params)
       .then((response: Response) => response.json())
-      .then((files: FileInterface[]) => {
-        console.log('filesList got');
-
-        // setFilesList(files);
+      .then((fileNames: FileNameInterface[]) => {
+        setFileNames(fileNames);
       })
       .catch((e) => {
         console.error('Fetch error:', e);
       });
   }
 
-  // FIXME В начале 2 раза вызывается makeFilesListRequest()
-  makeFilesListRequest();
+  useEffect(() => {
+    makeFileNamesRequest();
+  }, []);
 
   return (
     <>
       <h2>Список файлов</h2>
 
-      <div>
-        <ul>
-          {filesList.map((file: FileInterface) => (
-            <li key={file.id}>
-              <FilesListItem fileName={file.name} />
-            </li>
-          ))}
-        </ul>
-      </div>
+      <ul>
+        {fileNames.map((fileName: FileNameInterface) => (
+          <li key={fileName.id}>
+            <FileNamesListItem fileName={fileName.name} />
+          </li>
+        ))}
+      </ul>
     </>
   );
 }
