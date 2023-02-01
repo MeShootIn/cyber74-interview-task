@@ -39,12 +39,8 @@ export default function Footer() {
         <address>
           <ul>
             {socialLinks.map((socialLink: SocialLinkProps) => (
-              <li>
-                <SocialLink
-                  key={socialLink.href}
-                  href={socialLink.href}
-                  title={socialLink.title}
-                />
+              <li key={socialLink.href}>
+                <SocialLink href={socialLink.href} title={socialLink.title} />
               </li>
             ))}
           </ul>

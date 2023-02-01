@@ -1,7 +1,7 @@
 import AppLayout from './AppLayout';
-import Edit from '../Edit/Edit'; // TODO
-import Home from '../Home/Home'; // NORM
-import NotFound from '../NotFound/NotFound'; // NORM
+import Edit from '../Edit/Edit';
+import Home from '../Home/Home';
+import NotFound from '../NotFound/NotFound';
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
