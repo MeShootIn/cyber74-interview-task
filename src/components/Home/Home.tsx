@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { FileNameInterface } from '../../utils/file-interfaces';
+import { FileName } from '../../utils/file-types';
 import request from '../../utils/request';
 
 interface FileNamesListItemProps {
@@ -29,7 +29,7 @@ function FileNamesListItem({ fileName }: FileNamesListItemProps) {
 }
 
 export default function Home() {
-  const [fileNames, setFileNames] = useState<FileNameInterface[]>([]);
+  const [fileNames, setFileNames] = useState<FileName[]>([]);
 
   function makeFileNamesRequest() {
     // TODO https://github.com/typicode/json-server#paginate
@@ -63,10 +63,9 @@ export default function Home() {
       },
     };
 
-    // FIXME Unchecked runtime.lastError: The message port closed before a response was received.
     request(requestOptions.url, requestOptions.params)
       .then((response: Response) => response.json())
-      .then((fileNames: FileNameInterface[]) => {
+      .then((fileNames: FileName[]) => {
         setFileNames(fileNames);
       })
       .catch((e) => {
@@ -83,7 +82,7 @@ export default function Home() {
       <h2>Список файлов</h2>
 
       <ul>
-        {fileNames.map((fileName: FileNameInterface) => (
+        {fileNames.map((fileName: FileName) => (
           <li key={fileName.id}>
             <FileNamesListItem fileName={fileName.name} />
           </li>
