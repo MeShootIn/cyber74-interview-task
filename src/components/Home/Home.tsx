@@ -1,10 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import request from '../../utils/request';
+import { useEffect, useState } from 'react';
 import { FileNameInterface } from '../../utils/file-interfaces';
-
-const DUMMY_CALLBACK = () => {
-  alert('click');
-};
+import request from '../../utils/request';
 
 interface FileNamesListItemProps {
   fileName: string;
@@ -14,8 +10,20 @@ function FileNamesListItem({ fileName }: FileNamesListItemProps) {
   return (
     <span>
       <strong>{fileName}</strong>
-      <button onClick={DUMMY_CALLBACK}>✏️</button>
-      <button onClick={DUMMY_CALLBACK}>🗑️</button>
+      <button
+        onClick={() => {
+          alert('Edit');
+        }}
+      >
+        ✏️
+      </button>
+      <button
+        onClick={() => {
+          alert('Remove');
+        }}
+      >
+        🗑️
+      </button>
     </span>
   );
 }

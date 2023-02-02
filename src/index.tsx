@@ -1,18 +1,18 @@
-import App from './components/App/App';
-import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { FileProvider } from './components/FileContext/FileContext';
+import { Provider } from 'react-redux';
+import { store } from './app/store';
 import { BrowserRouter } from 'react-router-dom';
+import App from './components/App/App';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  <FileProvider>
+  <Provider store={store}>
     <BrowserRouter>
       <App />
     </BrowserRouter>
-  </FileProvider>
+  </Provider>
 );
 // WARN Для разработки лучше использовать <React.StrictMode> (обернуть ВСЁ), но
-// будут двойные useEffect(..., [])!
+// тогда будут двойные useEffect(..., [])

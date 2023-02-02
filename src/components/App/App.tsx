@@ -1,9 +1,8 @@
-import AppLayout from './AppLayout';
+import { Route, Routes } from 'react-router-dom';
 import Edit from '../Edit/Edit';
 import Home from '../Home/Home';
 import NotFound from '../NotFound/NotFound';
-import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import AppLayout from './AppLayout';
 
 export default function App() {
   return (

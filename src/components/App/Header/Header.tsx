@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 function HomeButton() {
   return (
     <Link to="/">
-      <button>Home (без сохранения?)</button>
+      <button>Home</button>
     </Link>
   );
 }
