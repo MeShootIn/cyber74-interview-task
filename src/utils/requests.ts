@@ -1,4 +1,4 @@
-import { FileContent, FileName } from './file-types';
+import { FileContent, FileName, NewFile } from './file-types';
 
 export default function request(
   url: string,
@@ -81,25 +81,69 @@ export async function fileChangeRequest(
   return await fileChangeResponse.json();
 }
 
-export async function fileRemoveRequest(
-  fileContent: FileContent
-): Promise<FileContent> {
-  const requestInfo = {
-    url: `${SERVER_FILE_CONTENTS}/${fileContent.id}`,
+export async function fileRemoveRequest(id: number): Promise<[any, any]> {
+  const fileNamesRequestInfo = {
+    url: `${SERVER_FILE_NAMES}/${id}`,
     options: {
-      method: 'PUT',
+      method: 'DELETE',
+    },
+  };
+  const fileNamesRequest = request(
+    fileNamesRequestInfo.url,
+    fileNamesRequestInfo.options
+  ).then((response) => response.json());
+
+  const fileContentsRequestInfo = {
+    url: `${SERVER_FILE_CONTENTS}/${id}`,
+    options: {
+      method: 'DELETE',
+    },
+  };
+  const fileContentsRequest = request(
+    fileContentsRequestInfo.url,
+    fileContentsRequestInfo.options
+  ).then((response) => response.json());
+
+  return Promise.all([fileNamesRequest, fileContentsRequest]);
+}
+
+export async function fileAddRequest({
+  name,
+  content,
+}: NewFile): Promise<[any, any]> {
+  const fileNamesRequestInfo = {
+    url: SERVER_FILE_NAMES,
+    options: {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
       },
       body: JSON.stringify({
-        content: fileContent.content,
+        name,
       }),
     },
   };
-  const fileChangeResponse = await request(
-    requestInfo.url,
-    requestInfo.options
-  );
+  const fileNamesRequest = request(
+    fileNamesRequestInfo.url,
+    fileNamesRequestInfo.options
+  ).then((response) => response.json());
 
-  return await fileChangeResponse.json();
+  const fileContentsRequestInfo = {
+    url: SERVER_FILE_CONTENTS,
+    options: {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify({
+        content,
+      }),
+    },
+  };
+  const fileContentsRequest = request(
+    fileContentsRequestInfo.url,
+    fileContentsRequestInfo.options
+  ).then((response) => response.json());
+
+  return Promise.all([fileNamesRequest, fileContentsRequest]);
 }

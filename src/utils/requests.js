@@ -47,7 +47,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.fileChangeRequest = exports.fileContentRequest = exports.fileNamesRequest = void 0;
+exports.fileAddRequest = exports.fileRemoveRequest = exports.fileChangeRequest = exports.fileContentRequest = exports.fileNamesRequest = void 0;
 function request(url, params, timeout) {
     if (timeout === void 0) { timeout = 3000; }
     var abortController = new AbortController();
@@ -143,3 +143,62 @@ function fileChangeRequest(fileContent) {
     });
 }
 exports.fileChangeRequest = fileChangeRequest;
+function fileRemoveRequest(id) {
+    return __awaiter(this, void 0, void 0, function () {
+        var fileNamesRequestInfo, fileNamesRequest, fileContentsRequestInfo, fileContentsRequest;
+        return __generator(this, function (_a) {
+            fileNamesRequestInfo = {
+                url: "".concat(SERVER_FILE_NAMES, "/").concat(id),
+                options: {
+                    method: 'DELETE'
+                }
+            };
+            fileNamesRequest = request(fileNamesRequestInfo.url, fileNamesRequestInfo.options).then(function (response) { return response.json(); });
+            fileContentsRequestInfo = {
+                url: "".concat(SERVER_FILE_CONTENTS, "/").concat(id),
+                options: {
+                    method: 'DELETE'
+                }
+            };
+            fileContentsRequest = request(fileContentsRequestInfo.url, fileContentsRequestInfo.options).then(function (response) { return response.json(); });
+            return [2 /*return*/, Promise.all([fileNamesRequest, fileContentsRequest])];
+        });
+    });
+}
+exports.fileRemoveRequest = fileRemoveRequest;
+function fileAddRequest(_a) {
+    var name = _a.name, content = _a.content;
+    return __awaiter(this, void 0, void 0, function () {
+        var fileNamesRequestInfo, fileNamesRequest, fileContentsRequestInfo, fileContentsRequest;
+        return __generator(this, function (_b) {
+            fileNamesRequestInfo = {
+                url: SERVER_FILE_NAMES,
+                options: {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json;charset=utf-8'
+                    },
+                    body: JSON.stringify({
+                        name: name
+                    })
+                }
+            };
+            fileNamesRequest = request(fileNamesRequestInfo.url, fileNamesRequestInfo.options).then(function (response) { return response.json(); });
+            fileContentsRequestInfo = {
+                url: SERVER_FILE_CONTENTS,
+                options: {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json;charset=utf-8'
+                    },
+                    body: JSON.stringify({
+                        content: content
+                    })
+                }
+            };
+            fileContentsRequest = request(fileContentsRequestInfo.url, fileContentsRequestInfo.options).then(function (response) { return response.json(); });
+            return [2 /*return*/, Promise.all([fileNamesRequest, fileContentsRequest])];
+        });
+    });
+}
+exports.fileAddRequest = fileAddRequest;
