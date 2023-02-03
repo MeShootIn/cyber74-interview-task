@@ -1,16 +1,9 @@
-import { Link } from 'react-router-dom';
-
-function HomeButton() {
-  return (
-    <Link to="/">
-      <button>Home</button>
-    </Link>
-  );
-}
+import styles from './Header.module.css';
+import HomeButton from './HomeButton/HomeButton';
 
 export default function Header() {
   return (
-    <header>
+    <header className={styles.Header}>
       <h1>Тестовое задание</h1>
 
       <nav>

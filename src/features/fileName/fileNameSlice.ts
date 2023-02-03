@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import type { RootState } from '../../app/store';
+import { RootState } from '../../app/store';
 import { FileName } from '../../utils/file-types';
 
 export type FileNameType = {

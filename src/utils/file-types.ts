@@ -1,4 +1,4 @@
-export type File = (FileName & FileContent) | null;
+export type File = FileName & FileContent;
 
 export type FileName = {
   name: string;
