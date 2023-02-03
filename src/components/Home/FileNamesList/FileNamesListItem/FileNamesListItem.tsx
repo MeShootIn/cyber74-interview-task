@@ -119,15 +119,11 @@ function makeFileRemoveRequest(id: number): Promise<[void, void]> {
   return Promise.all([fileNamesRequest, fileContentsRequest]);
 }
 
-// FIXME ошибка подключения к серверу после двух add
+// FIXME откл от сервера после двух add или add + remove или ...
 export default function FileNamesListItem({
   fileName,
 }: FileNamesListItemProps) {
-  function handleClickEdit(
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) {
-    event.preventDefault();
-
+  function handleClickEdit() {
     makeFileAddRequest().then((wtf) => {
       console.log('ADD all:');
       console.log(wtf); // [undefined, undefined]
@@ -136,11 +132,7 @@ export default function FileNamesListItem({
     });
   }
 
-  function handleClickRemove(
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) {
-    event.preventDefault();
-
+  function handleClickRemove() {
     makeFileRemoveRequest(fileName.id).then((wtf) => {
       console.log('REMOVE all:');
       console.log(wtf); // [undefined, undefined]

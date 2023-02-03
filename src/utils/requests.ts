@@ -80,3 +80,26 @@ export async function fileChangeRequest(
 
   return await fileChangeResponse.json();
 }
+
+export async function fileRemoveRequest(
+  fileContent: FileContent
+): Promise<FileContent> {
+  const requestInfo = {
+    url: `${SERVER_FILE_CONTENTS}/${fileContent.id}`,
+    options: {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify({
+        content: fileContent.content,
+      }),
+    },
+  };
+  const fileChangeResponse = await request(
+    requestInfo.url,
+    requestInfo.options
+  );
+
+  return await fileChangeResponse.json();
+}

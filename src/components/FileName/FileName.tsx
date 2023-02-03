@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import {
   selectFileNameObject,
   setFileNameObject,
-} from '../../features/fileName/fileNameSlice';
+} from '../../features/file-name/file-name-slice';
 
 // TODO
 export default function FileName() {

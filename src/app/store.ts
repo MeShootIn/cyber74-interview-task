@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import fileNameReducer from '../features/fileName/fileNameSlice';
+import fileNameReducer from '../features/file-name/file-name-slice';
 
 export const store = configureStore({
   reducer: {
