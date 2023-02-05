@@ -1,32 +1,33 @@
-import { FileName, NewFile } from '../../../../utils/file-types';
-import { fileAddRequest, fileRemoveRequest } from '../../../../utils/requests';
+import { useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../../../../app/hooks';
+import { setFileNameObject } from '../../../../features/file-name/file-name-slice';
+import { FileName } from '../../../../utils/file-types';
+import { fileRemoveRequest } from '../../../../utils/requests';
 
 export type FileNamesListItemProps = {
   fileName: FileName;
 };
 
-// FIXME откл от сервера после двух add или add + remove или ...
 export default function FileNamesListItem({
-  fileName,
+  fileName: { name, id },
 }: FileNamesListItemProps) {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
   function handleClickEdit() {
-    const unixTimeStamp = Date.now().toString();
-    const newFile: NewFile = {
-      name: unixTimeStamp,
-      content: unixTimeStamp,
-    }; // DEBUG
-    fileAddRequest(newFile)
-      .then(() => {
-        window.location.reload(); // FIXME
+    dispatch(
+      setFileNameObject({
+        fileNameObject: {
+          id,
+          name,
+        },
       })
-      .catch((error) => {
-        console.error(error);
-      });
+    );
+    navigate('/edit');
   }
 
   function handleClickRemove() {
-    // makeFileRemoveRequest(fileName.id);
-    fileRemoveRequest(fileName.id)
+    fileRemoveRequest(id)
       .then(() => {
         window.location.reload(); // FIXME
       })
@@ -37,7 +38,7 @@ export default function FileNamesListItem({
 
   return (
     <span>
-      <span>{fileName.name}</span>
+      <span>{name}</span>
       <button onClick={handleClickEdit}>✏️</button>
       <button onClick={handleClickRemove}>🗑️</button>
     </span>

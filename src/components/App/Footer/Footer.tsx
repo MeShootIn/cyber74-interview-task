@@ -1,3 +1,4 @@
+import CurrentYear from './CurrentYear/CurrentYear';
 import styles from './Footer.module.css';
 import SocialLink, { SocialLinkProps } from './SocialLink/SocialLink';
 
@@ -24,7 +25,7 @@ export default function Footer() {
   return (
     <footer className={styles.Footer}>
       <div>
-        <h3>Свяжитесь со мной</h3>
+        <h2>Свяжитесь со мной</h2>
 
         <address>
           {socialLinks.map((socialLink: SocialLinkProps) => (
@@ -37,8 +38,9 @@ export default function Footer() {
 
       <div>
         <p>
-          {/* TODO CurrentYear */}
-          &copy;&nbsp;<time dateTime="2023">2023</time>&nbsp;MeShootIn
+          &copy;&nbsp;
+          <CurrentYear />
+          &nbsp;MeShootIn
         </p>
       </div>
     </footer>

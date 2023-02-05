@@ -58,18 +58,19 @@ export async function fileContentRequest(id: number): Promise<FileContent> {
   return await fileContent.json();
 }
 
-export async function fileChangeRequest(
-  fileContent: FileContent
-): Promise<FileContent> {
+export async function fileContentChangeRequest({
+  content,
+  id,
+}: FileContent): Promise<FileContent> {
   const requestInfo = {
-    url: `${SERVER_FILE_CONTENTS}/${fileContent.id}`,
+    url: `${SERVER_FILE_CONTENTS}/${id}`,
     options: {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
       },
       body: JSON.stringify({
-        content: fileContent.content,
+        content,
       }),
     },
   };

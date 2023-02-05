@@ -47,7 +47,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.fileAddRequest = exports.fileRemoveRequest = exports.fileChangeRequest = exports.fileContentRequest = exports.fileNamesRequest = void 0;
+exports.fileAddRequest = exports.fileRemoveRequest = exports.fileContentChangeRequest = exports.fileContentRequest = exports.fileNamesRequest = void 0;
 function request(url, params, timeout) {
     if (timeout === void 0) { timeout = 3000; }
     var abortController = new AbortController();
@@ -115,34 +115,35 @@ function fileContentRequest(id) {
     });
 }
 exports.fileContentRequest = fileContentRequest;
-function fileChangeRequest(fileContent) {
+function fileContentChangeRequest(_a) {
+    var content = _a.content, id = _a.id;
     return __awaiter(this, void 0, void 0, function () {
         var requestInfo, fileChangeResponse;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
+        return __generator(this, function (_b) {
+            switch (_b.label) {
                 case 0:
                     requestInfo = {
-                        url: "".concat(SERVER_FILE_CONTENTS, "/").concat(fileContent.id),
+                        url: "".concat(SERVER_FILE_CONTENTS, "/").concat(id),
                         options: {
                             method: 'PUT',
                             headers: {
                                 'Content-Type': 'application/json;charset=utf-8'
                             },
                             body: JSON.stringify({
-                                content: fileContent.content
+                                content: content
                             })
                         }
                     };
                     return [4 /*yield*/, request(requestInfo.url, requestInfo.options)];
                 case 1:
-                    fileChangeResponse = _a.sent();
+                    fileChangeResponse = _b.sent();
                     return [4 /*yield*/, fileChangeResponse.json()];
-                case 2: return [2 /*return*/, _a.sent()];
+                case 2: return [2 /*return*/, _b.sent()];
             }
         });
     });
 }
-exports.fileChangeRequest = fileChangeRequest;
+exports.fileContentChangeRequest = fileContentChangeRequest;
 function fileRemoveRequest(id) {
     return __awaiter(this, void 0, void 0, function () {
         var fileNamesRequestInfo, fileNamesRequest, fileContentsRequestInfo, fileContentsRequest;

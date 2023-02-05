@@ -14,5 +14,4 @@ root.render(
     </BrowserRouter>
   </Provider>
 );
-// WARN Для разработки лучше использовать <React.StrictMode> (обернуть ВСЁ), но
-// тогда будут двойные useEffect(..., [])
+// WARN <React.StrictMode>
